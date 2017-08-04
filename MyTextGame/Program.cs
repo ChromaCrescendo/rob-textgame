@@ -13,38 +13,12 @@ namespace MyTextGame
         public string name;
         public int minAtk = 1;
         public int maxAtk;
-        //public int ac;
         public int dmg;
         public int armor;
+        
 
 
-
-
-        //unused grab health function
-        /*public int get_hp()
-        {
-            return hp;
-        }*/
-
-        //abandoned battle function
-        /*public void battle()
-        {
-            
-        }*/
-        //making an abstract equipped item class
-        /*abstract class EqpItm
-        {
-            abstract putOn(Character)
-            {
-                Character.Armor = this.Armor;
-                Character.Wpn.name =
-            }
-            abstract takeOff();
-            abstract public string descrip();
-            abstract public string name();
-
-
-            public void setValues(string name, int dmg, bool eqpFlag)
+            /*public void setValues(string name, int dmg, bool eqpFlag)
             {
                 this.name = name;
                 this.dmg = age;
@@ -71,7 +45,7 @@ namespace MyTextGame
         {
             hp = 70;
             maxAtk = 7;
-            armor = 7;
+            armor = 5;
             mp = 10;
         }
         
@@ -94,8 +68,9 @@ namespace MyTextGame
         public Warrior()
         {
             hp = 50;
+            minAtk = 3;
             maxAtk = 9;
-            armor = 5;
+            armor = 3;
             mp = 0;
         }
     }
@@ -113,7 +88,7 @@ namespace MyTextGame
             Character m1 = new Character();
             m1.hp = 30;
             m1.minAtk = 1;
-            m1.maxAtk = 5;
+            m1.maxAtk = 10;
             m1.name = "Large Rat";
 
             //appearance of first NPC and player name entry
@@ -177,7 +152,9 @@ namespace MyTextGame
             System.Threading.Thread.Sleep(500);
             Console.WriteLine("{0} the {1}? No that doesn't have a good ring to it... How did you end up in this prison?", p1.name, classInOriginal);
             Console.ReadLine();
-            Console.WriteLine("'Oh wow really? That's interesting... Just kidding I don't care.");
+            Console.WriteLine("'Oh wow really? That's interesting...'");
+            System.Threading.Thread.Sleep(1000);
+            Console.WriteLine("'Just kidding I don't care.'");
             System.Threading.Thread.Sleep(1000);
             Console.WriteLine("'Shhhh be quiet {0}!', whispers the voice, 'Is that a rat?! Kill it before you catch a disease!'", p1.name);
             Console.ForegroundColor = ConsoleColor.Red;
@@ -256,7 +233,7 @@ namespace MyTextGame
             else
             {
                 Console.WriteLine("YOU WIN");
-                Console.WriteLine("'Very good me lad, {0}, you were named poorly but ye be quite scrappy!", p1.name);
+                Console.WriteLine("'Very good me lad, {0}, you were named poorly but be quite a scrappy {1}!", p1.name, classInOriginal);
             }
 
             Console.ReadKey();
