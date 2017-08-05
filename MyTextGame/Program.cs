@@ -81,6 +81,7 @@ namespace MyTextGame
     {
         static void Main(string[] args)
         {
+            bool gameOver = false
             //intial setup for random damage throw
             Random r = new Random();
 
@@ -93,14 +94,17 @@ namespace MyTextGame
 
             //appearance of first NPC and player name entry
             Character p1;
-            Console.WriteLine("You awake in a cage in the dark. You hear a rough voice ask, 'Stranger, what is it that you do?'");     
-            System.Threading.Thread.Sleep(1000);
+            Console.WriteLine("You awake in a strange room in the dark. \n" + 
+                "You hear a rough voice ask, 'Stranger, what is it that you do?'");     
+            System.Threading.Thread.Sleep(2000);
             Console.WriteLine("You look all around you but see no one, only bars of iron\n");
-            System.Threading.Thread.Sleep(1000);
-            //bool behindBars = true;
+            System.Threading.Thread.Sleep(2000);
+            
             bool validClass = false;
             string classInput;
             string classInOriginal;
+            //class select loop
+            //cannot be skipped
             do
             {
                 Console.WriteLine("Pick a class: paladin, warrior, mage");
@@ -165,12 +169,14 @@ namespace MyTextGame
 
             while (p1.hp > 0 && m1.hp > 0)
             {
-                string input = Console.ReadLine().ToUpper();
+                
+                //secondary setup for
                 //randomizing both attacks
                 p1.dmg = r.Next(p1.minAtk, p1.maxAtk);
                 m1.dmg = r.Next(m1.minAtk, m1.maxAtk);
 
                 //taking commands
+                string input = Console.ReadLine().ToUpper();
                 switch (input)
                 {
                     case "ATTACK":
@@ -192,7 +198,8 @@ namespace MyTextGame
                         break;
 
                 }
-                //checking if the monster is still alive, without this the monster will deal a final blow with negative health
+                //checking if the monster is still alive, without this the monster will
+                //deal a final blow with negative health
                 if (m1.hp > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -201,14 +208,15 @@ namespace MyTextGame
                     if (classInput != "MAGE")
                     {
                         Console.WriteLine("Your worn armor saves you from " + p1.armor + " damage");
-                        //this triple nested if statement prevents an enemy from dealing negative damage because of armor and healing the character (HOPEFULLY)
+                        //this triple nested if statement prevents an enemy from dealing negative
+                        //damage because of armor and healing the character (HOPEFULLY)
                         if (m1.dmg > p1.armor)
                         {
                             p1.hp -= (m1.dmg - p1.armor);
                         }
                         else
                         {
-                            Console.WriteLine("The attack bounces off your armor and you receive no damage");
+                            Console.WriteLine("The attack bounces off your armor");
                         }
                     }
                     else { p1.hp -= m1.dmg; }
@@ -228,14 +236,14 @@ namespace MyTextGame
             if (p1.hp <= 0)
             {
                 Console.WriteLine("YOU LOSE");
+                gameOver = true;
                 Console.ReadKey();
             }
             else
             {
                 Console.WriteLine("YOU WIN");
                 Console.WriteLine("'Very good me lad, {0}, you were named poorly but be quite a scrappy {1}!", p1.name, classInOriginal);
-            }
-
+            }            
             Console.ReadKey();
         }
     }
