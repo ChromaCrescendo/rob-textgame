@@ -81,7 +81,7 @@ namespace MyTextGame
     {
         static void Main(string[] args)
         {
-            bool gameOver = false
+            bool gameOver = false;
             //intial setup for random damage throw
             Random r = new Random();
 
@@ -141,7 +141,7 @@ namespace MyTextGame
             Console.WriteLine("'BUT OF COURSE... YOU WERE A {0}!', exclaims the voice.", classInput);
             //epic pauses to harness the true awkward silence
             System.Threading.Thread.Sleep(1000);
-            Console.WriteLine("'SHUT THE @*&# UP! OR I'LL BEAT YOU TO SLEEP!', you hear a voice shout in the distance");
+            Console.WriteLine("'SHUT UP! OR I'LL BEAT YOU TO SLEEP!', you hear a voice shout in the distance");
             System.Threading.Thread.Sleep(1000);
             Console.WriteLine("'...'");
             System.Threading.Thread.Sleep(1000);
