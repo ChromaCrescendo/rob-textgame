@@ -139,7 +139,7 @@ namespace MyTextGame
 
             }
 
-            if (m1.hp <= 0 & p1.hp >= 0)
+            if (m1.hp <= 0 & p1.hp > 0)
             { return true; }
             else
             { return false; }
