@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp1
+namespace MyTextGame
 {
     class Character
     {
@@ -121,6 +121,7 @@ namespace ConsoleApp1
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine("The attack bounces off your armor");
                         }
                     }
@@ -150,6 +151,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            Console.Title = "The Bane Of Klothor";
             Character c = new Character();
             //set some stats
             Monster m = new Monster();
@@ -237,7 +239,7 @@ namespace ConsoleApp1
             if (did_p1_win == true)
             {
                 Console.WriteLine("YOU WIN");
-                Console.WriteLine("'Very good me lad, {0}, you were named poorly but be quite a scrappy {1}!", c.name, classInOriginal);
+                Console.WriteLine("'Very good me lad, {0}, you were named poorly but be quite a scrappy {1}!'", c.name, classInOriginal);
 
                 Monster g = new Monster();
                 Battle e = new Battle();
@@ -247,13 +249,13 @@ namespace ConsoleApp1
                 g.minAtk = 2;
                 g.maxAtk = 21;
                 g.name = "Sleepy Guard";
-                Console.WriteLine("'Who keeps shouting while I'm trying to sleep?!");
+                Console.WriteLine("'Who keeps shouting while I'm trying to sleep?!'");
                 did_p1_win = e.doBattle();
                 if (did_p1_win == true)
                 {
                     Console.WriteLine("GOOD JOB YOU KILLED THAT GUARD DUDE!\n" +
                         "'Now let's escape'\n" +
-                        "TO BE CONTINUNED...");
+                        "TO BE CONTINUED...");
                 }
                 else
                 {
