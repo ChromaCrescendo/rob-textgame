@@ -4,13 +4,13 @@ namespace MyTextGame
 {
     class Character
     {
-        public int hp;
-        public int mp;
+        public int hp; public int mp;
         public string name;
         public int minAtk = 1;
         public int maxAtk;
         public int dmg;
         public int armor;
+        public int level = 1;
     }
 
     class Monster : Character
@@ -37,7 +37,6 @@ namespace MyTextGame
             maxAtk = 11;
             armor = 0;
             mp = 20;
-
         }
     }
 
@@ -61,7 +60,7 @@ namespace MyTextGame
         public bool doBattle()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("A " + m1.name + " appears before you with " + m1.hp + " health and " + m1.maxAtk + " attack");
+            Console.WriteLine("A " + m1.name + " appears before you with " + m1.hp + " health and " + m1.maxAtk-- + " attack");
             Console.ForegroundColor = ConsoleColor.Gray;
             System.Threading.Thread.Sleep(1000);
             Console.WriteLine("What do you do? Attack or run?");
@@ -85,7 +84,8 @@ namespace MyTextGame
                         Console.WriteLine("You attack " + m1.name + " for " + p1.dmg + " damage");
                         m1.hp -= p1.dmg;
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("It now has " + m1.hp + " health left");
+                        //Erase comment mark to show monster health
+                        //Console.WriteLine("It now has " + m1.hp + " health left");
                         Console.ForegroundColor = ConsoleColor.Gray;
                         break;
 
@@ -110,11 +110,10 @@ namespace MyTextGame
                     //but still can calculate armor no matter what
                     //original line as follows
                     //if (classInput!= "MAGE")
-                    if (p1.name != "MAGE")
+                    if (p1.armor > 0)
                     {
                         Console.WriteLine("Your worn armor saves you from " + p1.armor + " damage");
-                        //this triple nested if statement prevents an enemy from dealing negative
-                        //damage because of armor and healing the character (HOPEFULLY)
+                        //Now checking if armor is greater than one instead of player class before doing armor calc
                         if (m1.dmg > p1.armor)
                         {
                             p1.hp -= (m1.dmg - p1.armor);
@@ -153,6 +152,7 @@ namespace MyTextGame
         {
             Console.Title = "The Bane Of Klothor";
             Character c = new Character();
+            //making first monster, a large rat
             //set some stats
             Monster m = new Monster();
             m.hp = 30;
@@ -216,12 +216,12 @@ namespace MyTextGame
             Console.WriteLine("'I apologize, I... ");
             System.Threading.Thread.Sleep(1000);
             Console.WriteLine("'I have random outbursts when I get excited'");
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
             Console.WriteLine("'Now what did you say your name was, young {0}?'", classInOriginal);
 
             c.name = Console.ReadLine();
             Console.WriteLine("{0}? What a terrible name!", c.name);
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(1000);
             Console.WriteLine("{0} the {1}? No that doesn't have a good ring to it... How did you end up in this prison?", c.name, classInOriginal);
             Console.ReadLine();
             Console.WriteLine("'Oh wow really? That's interesting...'");
@@ -230,27 +230,28 @@ namespace MyTextGame
             System.Threading.Thread.Sleep(1000);
             Console.WriteLine("'Shhhh be quiet {0}!', whispers the voice, 'Is that a rat?! Kill it before you catch a disease!'", c.name);
             
-
+            //making the first battle, setting characters and monsters for the fight
             Battle b = new Battle();
             b.p1 = c;
             b.m1 = m;
             bool did_p1_win = b.doBattle();
 
             if (did_p1_win == true)
-            {
+            {                
                 Console.WriteLine("YOU WIN");
                 Console.WriteLine("'Very good me lad, {0}, you were named poorly but be quite a scrappy {1}!'", c.name, classInOriginal);
-
+                //making the second monster
                 Monster g = new Monster();
-                Battle e = new Battle();
-                e.p1 = c;
-                e.m1 = g;
-                g.hp = 50;
-                g.minAtk = 2;
-                g.maxAtk = 21;
+                Battle b1 = new Battle();
+                //setting new monsters stats
+                b1.p1 = c; b1.m1 = g;
+                g.hp = 50; g.minAtk = 2; g.maxAtk = 21;
                 g.name = "Sleepy Guard";
+                //introducing sleepy guard
+                Console.WriteLine("You see a light in the distance grow, and you watch an angry guard with a torch approach you");
                 Console.WriteLine("'Who keeps shouting while I'm trying to sleep?!'");
-                did_p1_win = e.doBattle();
+
+                did_p1_win = b1.doBattle();
                 if (did_p1_win == true)
                 {
                     Console.WriteLine("GOOD JOB YOU KILLED THAT GUARD DUDE!\n" +
