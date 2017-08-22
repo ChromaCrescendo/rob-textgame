@@ -13,6 +13,8 @@ namespace MyTextGame
         public int dmg;
         public int armor;
         public int level = 1;
+        public int xpCurrent;
+        public int xpMax;
     }
 
     class Monster : Character
@@ -58,9 +60,9 @@ namespace MyTextGame
         public GM()
         {
             hpMax = 1000;
-            minAtk = 5;
+            minAtk = 25;
             maxAtk = 51;
-            armor = 0;
+            armor = 25;
         }
 
         class Battle
@@ -71,7 +73,7 @@ namespace MyTextGame
             public bool doBattle()
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("A " + m1.name + " appears before you with " + m1.hpCurrent + " health and " + m1.maxAtk-- + " attack");
+                Console.WriteLine("A " + m1.name + " appears before you with " + m1.hpCurrent + " health and " + (m1.maxAtk - 1) + " attack");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 System.Threading.Thread.Sleep(1000);
                 Console.WriteLine("What do you do? Attack or run?");
@@ -175,7 +177,7 @@ namespace MyTextGame
                 m.hpMax = 30;
                 m.hpCurrent = m.hpMax;
                 m.minAtk = 1;
-                m.maxAtk = 10;
+                m.maxAtk = 9;
                 m.name = "Large Rat";
 
                 //appearance of first NPC and player name entry
@@ -228,7 +230,30 @@ namespace MyTextGame
                             Console.WriteLine("(Invalid Class. Try Again!)");
                             break;
                     }
-
+                    //Showing stats of chosen class to user and asking for confirmation
+                    if (validClass == true)
+                    {
+                        Console.WriteLine("You have chosen the {0} class with {1} health, {2} armor, and {3} attack\n" +
+                            "Is this correct?\n" +
+                            "yes or no?", classInput, c.hpMax, c.armor, c.maxAtk);
+                        string confirmation = Console.ReadLine().ToUpper();
+                        switch(confirmation)
+                        {
+                            case ("Y"):
+                            case ("YES"):
+                                Console.WriteLine("you have selected " + classInput);
+                                break;
+                            case ("N"):
+                            case ("NO"):
+                                Console.WriteLine("You have canceled your selection of " + classInput);
+                                validClass = false;
+                                break;
+                            default:
+                                Console.WriteLine("Unknown response... Let's try that again...");
+                                validClass = false;
+                                break;
+                        }
+                    }
                 } while (validClass == false);
                 c.hpCurrent = c.hpMax;
 
@@ -275,8 +300,27 @@ namespace MyTextGame
                     if (did_p1_win == true)
                     {
                         Console.WriteLine("GOOD JOB YOU KILLED THAT GUARD DUDE!\n" +
-                            "'Now let's escape'\n" +
-                            "TO BE CONTINUED...");
+                            "'Now let's escape'\n");
+                        Monster dr = new Monster();
+                        Battle f = new Battle();
+                        f.p1 = c;
+                        f.m1 = dr;
+                        dr.hpMax = 250;
+                        dr.hpCurrent = dr.hpMax;
+                        dr.maxAtk = 500;
+                        dr.minAtk = 100;
+                        dr.name = "Ancient Dragon";
+                        did_p1_win = f.doBattle();
+                        if(did_p1_win == true)
+                        {
+                            Console.WriteLine("You killed a dragon oh my god!");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.ReadKey();
+                        }
+
                     }
                     else
                     {
